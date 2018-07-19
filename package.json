@@ -1,0 +1,25 @@
+{
+  "name": "LaboratoriosWeb",
+  "version": "1.0.0",
+  "description": "Una compilación de los laboratorios de Web Development, sexto semestre ciencias de la computación.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alv16106/LaboratoriosWeb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alv16106/LaboratoriosWeb/issues"
+  },
+  "homepage": "https://github.com/alv16106/LaboratoriosWeb#readme",
+  "devDependencies": {
+    "eslint": "^5.1.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0"
+  }
+}
