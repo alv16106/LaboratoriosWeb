@@ -27,6 +27,12 @@ const render = (lRender) => {
   but.innerHTML = 'Agregar';
   inputArea.appendChild(but);
 
+  if (lRender.cargando) {
+    const load = document.createElement('div');
+    load.className = 'loader';
+    tareas.appendChild(load);
+  }
+
   but.onclick = () => {
     const nuevaTarea = {
       title: input.value,
@@ -81,5 +87,6 @@ fetch('https://raw.githubusercontent.com/samuelchvez/todos-fake-json-api/master/
   .then(respuesta => respuesta.json())
   .then((respuestaJSON) => {
     respuestaJSON.forEach(element => estado.tareas.push(element));
+    estado.cargando = false;
     render(estado);
   });
