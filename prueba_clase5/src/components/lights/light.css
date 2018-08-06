@@ -1,0 +1,26 @@
+.light {
+  border-radius: 50%;
+}
+
+.light.small {
+  height: 50px;
+  width: 50px;
+}
+
+.light.medium {
+  height: 100px;
+  width: 100px;
+}
+
+.light.large {
+  height: 200px;
+  width: 200px;
+}
+
+.light.false{
+  opacity: 0.5;
+}
+
+.light.true{
+  opacity: 1;
+}
