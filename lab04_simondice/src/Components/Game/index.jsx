@@ -43,7 +43,7 @@ class Game extends React.Component{
         this._addStep(); 
       }
     }else{
-      console.log("Perdio este perro de la calle");
+      alert("Perdio!");
     }
   }
 
