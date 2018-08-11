@@ -1,5 +1,20 @@
+.info{
+  color:whitesmoke; 
+}
+
 .info h1{
   color: brown;
+  font-size: 4rem;
+}
+
+.tiempo{
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.grados{
+  font-weight: 700;
+  font-size: 2.5rem;
 }
 
 .info img{

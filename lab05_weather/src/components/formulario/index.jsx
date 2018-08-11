@@ -8,7 +8,6 @@ const Formulario = ({
 }) => {
   return <form onSubmit={busca}>
     <label>
-      Ciudad: &nbsp;
       <input type="text" value={txt} onChange={change} />
     </label>
     <input type="submit" value="Buscar" className='boton' />

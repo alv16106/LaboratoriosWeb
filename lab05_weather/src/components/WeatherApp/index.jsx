@@ -13,7 +13,7 @@ class WeatherApp extends React.Component {
       temp: 0,
       ico: '01d',
       ciudad: 'Desconocido',
-      tiempo: 'Depresion con chance de suicidio',
+      tiempo: 'Who knows',
       txt: ''
     };
   }
@@ -31,7 +31,7 @@ class WeatherApp extends React.Component {
       response => response.json()
     ).then(
       json => {
-        this.setState({temp: json.main.temp, ico: json.weather[0].icon, ciudad:json.name});
+        this.setState({temp: json.main.temp, ico: json.weather[0].icon, ciudad:json.name, tiempo:json.weather[0].description });
       }
     );
   }
