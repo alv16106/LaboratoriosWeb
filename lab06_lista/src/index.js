@@ -3,33 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { connect, Provider } from 'react-redux';
-import { lodash } from 'lodash';
+import { combineReducers, createStore } from 'redux';
 import registerServiceWorker from './registerServiceWorker';
+import Shopcart from './containers/shopcart';
+import ItemAdd from './containers/form';
+import List from './containers/list';
+import ShopCart from './containers/shopcart';
 
-const addItem = (newItem) => ({
-  type: 'ITEM_ADDED',
-  payload: newItem,
-});
-
-const buyItem = (name, price) => ({
-  type: 'ITEM_BOUGHT',
-  payload: {name: name, price: price},
-});
-
-const sellItem = (id) => ({
-  type: 'ITEM_SOLD',
-  payload: id,
-});
-
-const changeTotal = (tot) => ({
-  type: 'TOTAL_CHANGED',
-  payload: tot,
-});
-
-const items = (state = [{name: "Putas", quantity: 22, price: 120.5}], action) => {
+const items = (state = [{name: "500RP en LOL ", quantity: 22, price: 120.5}], action) => {
   switch(action.type) {
     case 'ITEM_ADDED': {
-      return [...state, {id: action.payload.id, name: action.payload.name, quantity: action.payload.quantity, price: action.payload.price}];
+      return [...state, {name: action.payload.name, quantity: action.payload.quantity, price: action.payload.price}];
     }
     case 'ITEM_SOLD': {
       return state.map((item, index) => {
@@ -69,5 +53,13 @@ const total = (state = 0, action) => {
   }
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const reducer = combineReducers({
+  shoppingCart,
+  total,
+  items,
+});
+
+const store = createStore(reducer);
+
+ReactDOM.render(<Provider store={store}><div><ItemAdd/><List/><ShopCart/></div></Provider>, document.getElementById('root'));
 registerServiceWorker();
