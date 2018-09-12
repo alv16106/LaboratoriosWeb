@@ -1,0 +1,15 @@
+{
+  byId: {
+    '1': {
+      id: '1',
+      postID: 100,
+      text: "Paper",
+    },
+    '20': {
+      id: '20',
+      postID: 5,
+      text: "Other thing",
+    },
+  },
+  order: ['20', '1'],
+}
