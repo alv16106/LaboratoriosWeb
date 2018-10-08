@@ -23,6 +23,7 @@ class Command(BaseCommand):
                     user_menu(current_user)
             elif option == '4':
                 print("Goodbye Lad")
+                cls()
                 break
             else:
                 pass
@@ -42,7 +43,7 @@ def list_users():
     cls()
     print("Lista de usuarios:")
     for x in User.objects.all():
-        print(x)
+        print("Username: {} -- email: {}".format(x.username, x.email if x.email else "n/a"))
     input()
     cls()
 
