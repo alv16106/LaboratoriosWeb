@@ -18,9 +18,6 @@
   },
   "homepage": "https://github.com/alv16106/LaboratoriosWeb#readme",
   "devDependencies": {
-    "eslint": "^5.1.0",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-plugin-import": "^2.13.0"
   },
   "dependencies": {
     "create-react-app": "^1.5.2"
