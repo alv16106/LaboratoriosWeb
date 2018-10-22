@@ -21,6 +21,7 @@ const Chisme = ({
       </div>
       <div className="card-action">
         <button onClick={onClick} className="waves-effect waves-light btn">Borrar</button>
+        <Link to={`/chisme/${id}`} className="waves-effect waves-light btn"> Mas informacion</Link>
       </div>
       {
         !confirmed && (
