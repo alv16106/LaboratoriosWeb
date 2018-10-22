@@ -26,10 +26,7 @@ const byId = (state = {}, action) => {
         const { id } = element;
         newState[id] = {...element, confirmed: true};
       });
-      return {
-        ...state,
-        ...newState
-      }
+      return newState
     }
     case types.CHISME_DELETED_SUCCESS: {
       const newState = state;
@@ -60,10 +57,7 @@ const order = (state = [], action) => {
       action.payload.forEach(element => {
         newState.push(element.id);
       });
-      return [
-        ...state,
-        ...newState
-      ]
+      return newState
     }
     case types.CHISME_DELETED_SUCCESS: {
       const id = action.payload;
