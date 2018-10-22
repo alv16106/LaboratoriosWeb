@@ -1,28 +1,29 @@
 import * as types from '../types';
-import { call, put } from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects'  
 
-export const post = (url, payload) => fetch(url, {
-  method: 'POST',
+export const change = (url, method, body) => fetch(url, {
+  method: method,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify(payload)
+  body: body ? JSON.stringify(body) : {}
 })
+.then(response => method!='DELETE' ? response.json(): response)
 
 export const get = (url) => fetch(url)
 .then(response => response.json())
 
-export const addChisme = (
+export const addChismeRequest = ({
   id,
   title,
-  body,
-) => ({
+  content,
+}) => ({
   type: types.CHISME_ADDED_REQUESTED,
   payload: {
     id,
     title,
-    body,
+    content,
   }
 });
 
@@ -35,16 +36,12 @@ export const removeChisme = (
   }
 })
 
-export const updateChisme = (
-  id,
-  newTitle,
-  newBody,
+export const requestChisme = (
+  id
   ) => ({
-    type: types.CHISME_UPDATED,
+    type: types.CHISME_REQUESTED,
     payload: {
-      id,
-      newTitle,
-      newBody,
+      id
     }
   })
 
@@ -53,21 +50,44 @@ export const fetchChismesRequest = (
     type: types.CHISMES_FETCH_REQUESTED,
   });
 
-  export function* fetchChismes(action) {
-    try {
-       const chismes = yield call(api, 'http://localhost:8000/api/chisme/');
-       yield put({type: types.CHISMES_FETCH_SUCCESS, payload: chismes});
-    } catch (e) {
-        console.log(e, "lamo")
-    }
+export function* fetchChismes(action) {
+  console.log(action);
+  try {
+    const chismes = yield call(get, 'http://localhost:8000/api/chisme/');
+    yield put({type: types.CHISMES_FETCH_SUCCESS, payload: chismes});
+  } catch (e) {
+    console.log(e, "lamo")
+  }
  }
 
- export function* deleteChisme(id) {
+ export function* getChisme(action) {
+  console.log(action);
   try {
-     const chismes = yield call(api2, `http://localhost:8000/api/chisme/${id}`);
-     console.log(chismes);
-     yield put({type: types.CHISME_DELETED_SUCCESS, payload: chismes});
+    const chisme = yield call(get, `http://localhost:8000/api/chisme/${action.payload.id}/`);
+    yield put({type: types.CHISME_REQUESTED_SUCCESS, payload: chisme});
+  } catch (e) {
+    console.log(e, "lamo")
+  }
+ }
+
+export function* deleteChisme(action) {
+  console.log(action);
+  try {
+     const deleted = yield call(change, `http://localhost:8000/api/chisme/${action.payload.id}/`, 'DELETE');
+     console.log(deleted);
+     yield put({type: types.CHISME_DELETED_SUCCESS, payload: action.payload.id});
   } catch (e) {
       console.log(e, "lamo")
   }
+}
+
+export function* addChisme(action) {
+  console.log(action);
+  try {
+    const added = yield call(change, `http://localhost:8000/api/chisme/`, 'POST', {title: action.payload.title, content: action.payload.content});
+    console.log(added);
+    yield put({type: types.CHISME_ADDED_SUCCESS, payload: {oldID: action.payload.id, ...added}});
+ } catch (e) {
+     console.log(e, "lamo")
+ }
 }
